@@ -1,0 +1,47 @@
+{#{% extends 'base.html.twig' %}#}
+
+{#{% block title %}Grades{% endblock %}#}
+
+{#{% form_theme form 'bootstrap_4_layout.html.twig' %}#}
+
+{#{% block body %}#}
+
+{#    <h1>{{ student.firstName }} {{ student.lastName }}</h1>#}
+{#    {{ form_start(form) }}#}
+{#    <div class="table-responsive" style="margin-top: 2rem">#}
+{#        <table class="table table-bordered" style="table-layout: auto; border-collapse: collapse">#}
+{#            <thead class="table-primary">#}
+{#            <tr>#}
+{#                <th>Id</th>#}
+{#                <th>Course Name</th>#}
+{#                <th>Grade</th>#}
+{#            </tr>#}
+{#            </thead>#}
+{#            <tbody>#}
+{#            {% for course in courses %}#}
+{#                <tr>#}
+{#                    <td>{{ course.id }}</td>#}
+{#                    <td>{{ course.name }}</td>#}
+{#                    <td><input  type="number" class="form-control col-5" name="grade"></td>#}
+{#                </tr>#}
+{#            {% endfor %}#}
+{#            </tbody>#}
+{#        </table>#}
+{#    </div>#}
+
+{#    {% for i in form.courses %}#}
+{#        {{ form_row(form.save) }}#}
+{#    {% endfor %}#}
+
+{#    {{ form_widget(form) }}#}
+{#    {{ form_end(form) }}#}
+
+{#{% endblock %}#}
+
+{#{% block javascripts %}#}
+{#    <script>#}
+{#        $(document).ready(function () {#}
+{#            $("#link-students").addClass("active");#}
+{#        });#}
+{#    </script>#}
+{#{% endblock %}#}

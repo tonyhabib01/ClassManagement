@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Courses{% endblock %}
+
+{% form_theme filterForm 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+
+
+    <h1>Courses</h1>
+    {# read and display just one flash message type #}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {{ form_start(filterForm, {'method': 'GET'}) }}
+    {{ form_widget(filterForm) }}
+    {{ form_end(filterForm) }}
+
+    <div class="table-responsive" style="margin-top: 2rem">
+        <table class="table table-bordered">
+            <thead class="table-primary">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Details</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for course in courses %}
+                <tr>
+                    <td>{{ course.id }}</td>
+                    <td>{{ course.name }}</td>
+                    <td><a href="{{path('course.details', {id: course.id})}}" class="btn btn-info">Details</a></td>
+                    <td><a href="{{path('course.edit', {id: course.id})}}" class="btn btn-primary">Edit</a></td>
+                    <td><a href="{{path('course.delete', {id: course.id})}}" class="btn btn-danger">Delete</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-end">
+                {% for i in 1..pages['totalPages'] %}
+                    {% if loop.first %}
+                        <li class="page-item {% if pages['currentPage'] == 1 %}disabled{% endif %}"> {# Put disabled#}
+                            <a class="page-link" href="{{ path('course.index',{page: pages['currentPage']-1}) }}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    <li class="page-item {% if pages['currentPage'] == i %}active{% endif %}"><a class="page-link" href="{{ path('course.index',{page: i}) }}">{{ i }}</a></li>
+
+                    {% if loop.last %}
+                        <li class="page-item {% if pages['currentPage'] == pages['totalPages'] %}disabled{% endif %}"> {# Put disabled#}
+                            <a class="page-link" href="{{ path('course.index',{page: pages['currentPage']+1}) }}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </nav>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function () {
+            $("#link-courses").addClass("active");
+        });
+    </script>
+{% endblock %}

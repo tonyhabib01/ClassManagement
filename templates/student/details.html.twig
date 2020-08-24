@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Students{% endblock %}
+
+{% block body %}
+
+    <h1>Details</h1>
+
+    <div class="table-responsive" style="margin-top: 2rem">
+        <table class="table table-bordered">
+            <thead class="table-primary">
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Date Of Birth</th>
+                    <th>Class</th>
+                    <th>Grade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ student.firstName }}</td>
+                    <td>{{ student.lastName }}</td>
+                    <td>{{ student.dateOfBirth|date('d/m/y') }}</td>
+                    {% if student.classe is null %}
+                        <td>NULL</td>
+                    {% else %}
+                        <td>{{ student.classe.name }}</td>
+                    {% endif %}
+                    {% if student.grades.count != 0 %}
+                        <td>{{ student.gpa }}</td>
+                    {% else %}
+                        <td style="text-align: center;"><a href="#"><i class="fa fa-plus fa-2x" aria-hidden="true"></i></a></td>
+                    {% endif %}
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function () {
+            $("#link-students").addClass("active");
+        });
+    </script>
+{% endblock %}

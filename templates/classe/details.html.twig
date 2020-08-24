@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Class{% endblock %}
+
+{% form_theme filterForm 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+
+    <h1>{{ classe.name }}</h1>
+
+    {{ form_start(filterForm, {'method': 'GET'}) }}
+    {{ form_widget(filterForm) }}
+    {{ form_end(filterForm) }}
+
+    <div class="table-responsive" style="margin-top: 2rem">
+        <table class="table table-bordered">
+            <thead class="table-primary">
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Grade</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for student in students %}
+                <tr>
+                    <td>{{ student.firstName }}</td>
+                    <td>{{ student.lastName }}</td>
+                    {% if student.grades.count != 0  %}
+                        <td>{{ student.gpa }}</td>
+                    {% else %}
+                        <td style="text-align: center;"><a href="#"><i class="fa fa-plus fa-2x" aria-hidden="true"></i></a></td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function () {
+            $("#link-classes").addClass("active");
+        });
+    </script>
+{% endblock %}
